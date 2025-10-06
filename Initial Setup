@@ -1,0 +1,3 @@
+#These are the contact inputs and the splitting up of each contact info
+contact_input = input()
+contact_input = contact_input.split("|")
