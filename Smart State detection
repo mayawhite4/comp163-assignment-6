@@ -1,0 +1,46 @@
+#These are the contact inputs and the splitting up of each contact info
+#It also includes the sential value Done
+contact_input = input()
+contact_input = contact_input.strip()
+
+while contact_input != "DONE":
+    new_contact = contact_input.split("|")
+    name = new_contact[0]
+    phone = new_contact[1]
+    email = new_contact[2]
+    address = new_contact[3]
+    #The cleaning up of the name. Making it titled and stripping it of the extra whitespace
+    if name != name.title():
+        new_contact[0] = name.strip()
+        new_contact[0] = name.title()
+    #The cleaning up of the address. Making sure it has poper captalization and state abbreviation
+    if address != address.title():
+        address = address.split()
+        for i in range(0,len(address)):
+            address_holder = address[i]
+            if len(address[i]) == 2:
+                state_abbr = address[i]
+                state_abbr = state_abbr.upper()
+                address[i] = state_abbr
+            elif address_holder.isalpha():
+                correcting_address = address_holder.title()
+                address[i] = correcting_address 
+            elif address_holder.islower():
+                correcting_address = address_holder.title()
+                address[i] = correcting_address
+        new_contact[3] = " ".join(address)
+    #Phone number standardization
+    new_number = ""
+    if len(phone) != 11:
+        for i in phone:
+            if i.isdigit():
+                new_number = new_number + i
+        new_number = "(" + new_number[0:3] + ")" + new_number[3:6] +"-" + new_number[6:]
+        new_contact[1] = new_number
+    #This is the email formatting ensuring that eveyrthing is lower case
+    if email != email.lower():
+        email = email.strip()
+        email = email.lower()
+        new_contact[2] = email
+    print(new_contact)
+    contact_input = input()
