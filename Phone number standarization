@@ -1,10 +1,7 @@
 #These are the contact inputs and the splitting up of each contact info
 #It also includes the sential value Done
 contact_input = input()
-new_phone1 = ""
-new_phone2 = ""
-new_phone3 = ""
-official_phone = ""
+contact_input = contact_input.strip()
 
 while contact_input != "DONE":
     new_contact = contact_input.split("|")
@@ -33,16 +30,12 @@ while contact_input != "DONE":
                 address[i] = correcting_address
         new_contact[3] = " ".join(address)
     #Phone number standardization
-    if phone.isdigit:
-        for num1 in range (0,3):
-            new_phone1 = new_phone1 + phone[num1]
-        official_phone = "(" + new_phone1 + ")"
-        for num2 in range(3,6):
-            new_phone2 =  new_phone2 + phone[num2]
-        official_phone = official_phone + " " + new_phone2
-        for num3 in range(6,10):
-            new_phone3 = new_phone3 + phone[num3]
-        official_phone = official_phone + "-" + new_phone3
-        new_contact[1] = official_phone
+    new_number = ""
+    if len(phone) != 11:
+        for i in phone:
+            if i.isdigit():
+                new_number = new_number + i
+        new_number = "(" + new_number[0:3] + ")" + new_number[3:6] +"-" + new_number[6:]
+        new_contact[1] = new_number
     print(new_contact)
     contact_input = input()
