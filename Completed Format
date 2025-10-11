@@ -1,0 +1,88 @@
+#These are the contact inputs and the splitting up of each contact info
+#It also includes the sential value Done
+contact_input = input("Enter contact information (format: name|phone|email|address):")
+contact_input = contact_input.strip()
+count = 1
+name_list = []
+number_list = []
+email_list = []
+
+#The print out for the contact directory title
+print()
+print(f"\n=== CONTACT DIRECTORY ===")
+#Loop for the print out for contact directory and for the formatting
+while contact_input != "DONE":
+    new_contact = contact_input.split("|")
+    name = new_contact[0]
+    phone = new_contact[1]
+    email = new_contact[2]
+    address = new_contact[3]
+    #The cleaning up of the name. Making it titled and stripping it of the extra whitespace
+    if name != name.title():
+        new_contact[0] = name.strip()
+        name = new_contact[0]
+        new_contact[0] = name.title()
+    #The cleaning up of the address. Making sure it has poper captalization and state abbreviation
+    if address != address.title():
+        address = address.split()
+        for i in range(0,len(address)):
+            address_holder = address[i]
+            if len(address[i]) == 2:
+                state_abbr = address[i]
+                state_abbr = state_abbr.upper()
+                address[i] = state_abbr
+            elif address_holder.isalpha():
+                correcting_address = address_holder.title()
+                address[i] = correcting_address 
+            elif address_holder.islower():
+                correcting_address = address_holder.title()
+                address[i] = correcting_address
+        new_contact[3] = " ".join(address)
+    #Phone number standardization
+    new_number = ""
+    if len(phone) != 11:
+        for i in phone:
+            if i.isdigit():
+                new_number = new_number + i
+        new_number = "(" + new_number[0:3] + ")" + " " + new_number[3:6] +"-" + new_number[6:]
+        new_contact[1] = new_number
+    #This is the email formatting ensuring that eveyrthing is lower case
+    if email != email.lower():
+        email = email.strip()
+        email = email.lower()
+        new_contact[2] = email
+    print()
+    print(f"CONTACT {count}:")
+    print(f"Name:     {new_contact[0]:>2}")
+    print(f"Phone:    {new_contact[1]:>3}")
+    print(f"Email:    {new_contact[2]:>2}")
+    print(f"Address:  {new_contact[3]:>2}")
+
+    name = new_contact[0]
+    number = new_contact[1]
+    email = new_contact[2]
+    name = name.split()
+    if len(name) == 3:
+        first_name = name[0]
+        middle_name = name[1]
+        last_name = name[-1]
+        name = last_name + "," + " " + first_name + " " + middle_name
+    else:
+        first_name = name[0]
+        last_name = name[-1]
+        name = last_name + "," + " " + first_name
+    name_list.append(name)
+    number_list.append(number)
+    email_list.append(email)
+    contact_input = input()
+    
+    count += 1
+
+#The directory summary part of the code as well as the formatted for printing
+print()
+print(f"=== DIRECTORY SUMMARY ===")
+print(f"Total contacts processed: {count - 1}")
+print()
+print(f"=== FORMATTED FOR PRINTING ===")
+for i in range(0,len(name_list)):
+    print(f"{name_list[i]:<28}{number_list[i]:<20}{email_list[i]}")
