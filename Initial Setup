@@ -1,3 +1,8 @@
+# mrwhite4_assignment_6.py 
+# Student: Maya White  
+# Assignment 6: Contact Information Formatter 
+# Demonstrates mastery of string methods for data cleaning and formatting
+
 #These are the contact inputs and the splitting up of each contact info
 contact_input = input()
 contact_input = contact_input.split("|")
